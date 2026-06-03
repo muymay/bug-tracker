@@ -1,4 +1,4 @@
-## Bug-Tracker Project Report through Github
+## Bug-Tracker Project
 ### Phase 1 - React Set Up + Bug List (Start June 1, 2026, End - )
 
 Day 1: June 1, 2026
@@ -21,11 +21,25 @@ Used `map()` and `key` props to render the list of bugs.
 Learned that => () or {} needs to be returned explicitly in arrow functions when using `map()`.
 Questions for this phase: 
 1. What would happen if you removed the `key` prop from each `<tr>`?
+
 Answer: it will get an error it would still give the output but again it will say that it child should have a unique key prop.
 2. Why is `bugs` defined outside the component function, not inside it?
+
 Answer: Because we are gathering all from that data so it is contained in an outside component function also it is static data.
 3. What does `export default BugList` do — why does App.jsx need it?
+
 Answer: allows being imported from other files and give them the freedom to do whatever they want with it.
+
+Day 3: June 3, 2026
+Goal: Install Tailwind CSS
+Questions for this phase:
+1. What file do you need to update to register the Tailwind Vite plugin? what does adding it there do?
+
+Answer: We need to update `vite.config.js` to register the Tailwind Vite plugin. Adding it there allows Vite to process Tailwind CSS files and apply the necessary transformations during the
+build process.
+2. What is the one CSS import line you need to add and which file does it go in?
+
+Answer: The one CSS import line you need to add is `@import "tailwindcss` and it goes in the `src/index.css` file. Vite projects load `index.css` globally, which makes Tailwind available throughout the app.
 
 Readings:
 1. https://react.dev/learn/rendering-lists

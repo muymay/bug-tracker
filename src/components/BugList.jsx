@@ -26,9 +26,22 @@ const bugs = [
     }
 ];
 
+const severityStyles = {
+  'critical': 'bg-red-500 text-white',
+  'high': 'bg-orange-500 text-white',
+  'medium': 'bg-yellow-500 text-white',
+  'low': 'bg-green-500 text-white'
+}
+
+const statusStyles = {
+  'open': 'bg-blue-500 text-white',
+  'in progress': 'bg-purple-500 text-white',
+  'resolved': 'bg-gray-500 text-white'
+}
+
 function BugList() {
     return(
-        <table>
+        <table className = "w-full text-center border-collapse"> 
             <thead>
             <tr>
                 <th>Title</th>
@@ -36,11 +49,12 @@ function BugList() {
                 <th>Status</th>
             </tr>
             </thead>
-            <tbody> {bugs.map(level => (
+            <tbody> 
+            {bugs.map(level => (
                 <tr key = {level.id}>
                     <td>{level.title}</td>
-                    <td>{level.severity}</td>
-                    <td>{level.status}</td>
+                    <td className={`rounded-full p-4 ${severityStyles[level.severity]}`}>{level.severity}</td>
+                    <td className={`rounded-full p-4 ${statusStyles[level.status]}`}>{level.status}</td>
                 </tr>                
             ))}
             </tbody>
