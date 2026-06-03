@@ -31,7 +31,7 @@ Answer: Because we are gathering all from that data so it is contained in an out
 Answer: allows being imported from other files and give them the freedom to do whatever they want with it.
 
 Day 3: June 3, 2026
-Goal: Install Tailwind CSS
+Goal: Install Tailwind CSS setup + color coded badges for bug status.
 Questions for this phase:
 1. What file do you need to update to register the Tailwind Vite plugin? what does adding it there do?
 
@@ -40,6 +40,8 @@ build process.
 2. What is the one CSS import line you need to add and which file does it go in?
 
 Answer: The one CSS import line you need to add is `@import "tailwindcss` and it goes in the `src/index.css` file. Vite projects load `index.css` globally, which makes Tailwind available throughout the app.
+
+Learned how to use Tailwind CSS classes to style the bug status badges with different colors based on their status (e.g., "Open" in red, "In Progress" in yellow, "Closed" in green). Using ternary operators to conditionally apply Tailwind classes based on the bug's status.
 
 Readings:
 1. https://react.dev/learn/rendering-lists
