@@ -1,33 +1,7 @@
 import { useState } from 'react';
 
-export default function BugList() {
-  const [bugs] = useState([
-    { id: 1,
-      title: 'Login fails with spaces',
-      severity: 'high',
-      status: 'open' 
-    },
-    { id: 2,
-      title: 'Dropdown not closing',
-      severity: 'medium',
-      status: 'open' 
-    },
-    { id: 3,
-      title: 'Table not filtering',
-      severity: 'critical',
-      status: 'in progress' 
-    },
-    { id: 4,
-      title: 'Form submits empty',
-      severity: 'high',
-      status: 'resolved' 
-    },
-    { id: 5,
-      title: 'Button misaligned on mobile',
-      severity: 'low',
-      status: 'open' 
-    }
-  ]);
+// receive the prop
+export default function BugList({bugs}) {
   const [activeFilter, setActiveFilter] = useState('all');
   const filteredState = bugs.filter( bug => {
     if (activeFilter === 'all') return true;
@@ -48,6 +22,7 @@ const statusStyles = {
   'in progress': 'bg-purple-500 text-white',
   'resolved': 'bg-gray-500 text-white'
 }
+
   return (
     <div className="p-4">
       

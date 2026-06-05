@@ -54,3 +54,22 @@ filteredState recalculates
 
 Reading
 1. react.dev/learn/state-a-components-memory
+
+Day 5: June 5, 2026
+Goal - Learn passing props to child components 
+What changes today: In `App.jsx`:
+* Move the bugs array here
+* Pass it to `BugList` as a prop called `bugs`
+
+In `BugList.jsx`:
+* Remove the bugs array from useState
+* Receive `bugs` as a prop instead
+* Keep everything else the same 
+
+After:
+No change in the UI, but 
+Before -> BugList owned its own data
+After -> App owns data, passes to BugList
+
+Reading:
+1. https://react.dev/learn/passing-props-to-a-component
