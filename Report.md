@@ -45,3 +45,12 @@ Learned how to use Tailwind CSS classes to style the bug status badges with diff
 
 Readings:
 1. https://react.dev/learn/rendering-lists
+
+Day 4: June 4, 2026
+
+useState filter buttons + open bug count 
+state change triggers re-render
+filteredState recalculates 
+
+Reading
+1. react.dev/learn/state-a-components-memory
