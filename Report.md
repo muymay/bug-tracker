@@ -1,5 +1,5 @@
 ## Bug-Tracker Project
-### Phase 1 - React Set Up + Bug List (Start June 1, 2026, End - )
+### Phase 1 - React Set Up + Bug List (Start June 1, 2026, End June 6, 2026)
 
 Day 1: June 1, 2026
 Installed Vite and React:
@@ -73,3 +73,5 @@ After -> App owns data, passes to BugList
 
 Reading:
 1. https://react.dev/learn/passing-props-to-a-component
+
+### Phase 2 - React Set Up + Bug List (Start June 7, 2026, End - )
