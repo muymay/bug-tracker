@@ -1,7 +1,8 @@
 import express from 'express';
+import cors from 'cors';
 const app = express();
 const port = 3001 // 3001 is where React runs
-
+app.use(cors());
 app.get('/bugs', (req, res) => {
     res.json([
     { id: 1,
