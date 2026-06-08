@@ -84,6 +84,23 @@ Created backend/server.js with Express server and API endpoint `/api/bugs` that 
 
 Browser requsted `http://localhost:3000/api/bugs` and received JSON response with bug data.
 
+Goal: Connect React frontend to Express backend to fetch and display bugs.
+What was added and changed:
+- Removed hardcoded bugs from `App.jsx`
+- Added useState([] ) for bugs - starts empty
+- Added useEffect that fetches from http://localhost:3001/bugs on mount 
+- Added cors() to Express so React can talk to the backend
+
+Key concepts learned:
+- useEffect with [] runs once on mount only
+- fetch() returns a Promise — .then() chains handle the response
+- CORS blocks cross-origin requests by default — cors() middleware fixes it
+- Two terminals needed — one for React, one for Express
+
+Bug encountered: table showed "Open bugs: 0" — server wasn't running
+Fixed: opened second terminal, ran both servers simultaneously
+
 Reading:
 1. https://expressjs.com/en/starter/hello-world.html
 2. https://sqlitetutorial.net/sqlite-select
+3. https://react.dev/learn/synchronizing-with-effects 
