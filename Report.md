@@ -84,7 +84,6 @@ Created backend/server.js with Express server and API endpoint `/api/bugs` that 
 
 Browser requsted `http://localhost:3000/api/bugs` and received JSON response with bug data.
 
-
 Reading:
 1. https://expressjs.com/en/starter/hello-world.html
 2. https://sqlitetutorial.net/sqlite-select
