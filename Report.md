@@ -75,3 +75,15 @@ Reading:
 1. https://react.dev/learn/passing-props-to-a-component
 
 ### Phase 2 - React Set Up + Bug List (Start June 7, 2026, End - )
+
+Day 6: June 7, 2026
+
+Goal: Set up Express server + API endpoint to serve bugs from a SQLite database.
+
+Created backend/server.js with Express server and API endpoint `/api/bugs` that connects to a SQLite database and returns bug data as JSON.
+
+Browser requsted `http://localhost:3000/api/bugs` and received JSON response with bug data.
+
+Reading:
+1. https://expressjs.com/en/starter/hello-world.html
+2. https://sqlitetutorial.net/sqlite-select
