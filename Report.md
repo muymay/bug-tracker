@@ -104,3 +104,27 @@ Reading:
 1. https://expressjs.com/en/starter/hello-world.html
 2. https://sqlitetutorial.net/sqlite-select
 3. https://react.dev/learn/synchronizing-with-effects 
+
+Day 7: June 8, 2026 
+
+id -> unique identifier (auto-incremented)
+title -> bug description
+severity -> critical, high, medium, low
+status -> open, in progress, resolved
+created_at -> when the bug was logged
+
+Goal: Connect SQLite database to Express server
+
+What I built:
+- Created `database.js` to set up SQLite connection and create `bugs` table if it doesn't exist
+- Seeded 5 initial bugs using COUNT(*) to check if table is empty before inserting
+- Updated `server.js` to query the `bugs` table and return results as JSON
+- Full stack working: React -> Express -> SQLite -> Express -> React
+
+Learned:
+- Create table with SQL
+- db.prepare.all() return all rows as a JS array of objects
+- db.prepare.run() executes a query without returning data (used for INSERT)
+
+Reading:
+1. https://www.sqlitetutorial.net/sqlite-insert/
