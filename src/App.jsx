@@ -1,5 +1,6 @@
 import BugList from './components/BugList'
 import { useState, useEffect } from 'react';
+import BugForm from './components/BugForm';
 // App.jsx the parent, owns the data
 // BugList = the child, displays the data
 
@@ -44,6 +45,8 @@ function App() {
     <div>
       <h1 className="text-3x1 font-bold text-center mt-8"> 
         Bug Tracker </h1>
+      <BugForm onBugAdded={(newBug) => setBugs([...bugs, newBug])} />
+      {/* new array = [all existing bugs + the new bug] */}
       <BugList bugs={bugs} />
     </div>
   );

@@ -4,6 +4,7 @@ import db from './database.js' // import the database connection
 const app = express();
 const port = 3001 // 3001 is where React runs
 app.use(cors());
+app.use(express.json()); // to parse JSON bodies act as a middleware
 // app.get('/bugs', (req, res) => {
 //     res.json([
 //     { id: 1,
@@ -36,6 +37,12 @@ app.use(cors());
 app.get('/bugs', (req, res) => {
   const bugs = db.prepare('SELECT * FROM bugs').all(); // get all the bugs from the database
   res.json(bugs); // send the bugs as a JSON response
+});
+app.post('/bugs', (req, res) => {
+  const { title, severity, status } = req.body;
+  const result = db.prepare('INSERT INTO bugs (title, severity, status) VALUES (?, ?, ?)').run(title, severity, status);
+  const newBug = db.prepare('SELECT * FROM bugs WHERE id = ?').get(result.lastInsertRowid);
+  res.json(newBug);
 });
 app.listen (port, () => {
     console.log('Listening to port');
