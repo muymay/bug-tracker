@@ -128,3 +128,29 @@ Learned:
 
 Reading:
 1. https://www.sqlitetutorial.net/sqlite-insert/
+
+Day 8: June 9, 2026
+
+Goal: add bug form to create new bugs via POST request
+
+GET -> fetch existing data
+POST -> create new data
+
+app.use(express.json()) -> parse incoming request body
+req.body -> where your form data arrives
+
+Built:
+- BugForm component with controlled inputs
+- POST /bugs route in Express
+- SQLite INSERT on form submit
+- onBugAdded prop passes new bug from child to parent
+- Spread operator adds new bug to state without mutation
+
+Key concepts:
+- POST = create data, GET = read data
+- express.json() parses incoming request body
+- [...bugs, newBug] creates new array — never mutate state directly
+- Data persists in SQLite after server restart
+
+Reading:
+1. https://expressjs.com/en/guide/routing/
