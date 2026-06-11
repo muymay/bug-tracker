@@ -104,3 +104,53 @@ Reading:
 1. https://expressjs.com/en/starter/hello-world.html
 2. https://sqlitetutorial.net/sqlite-select
 3. https://react.dev/learn/synchronizing-with-effects 
+
+Day 7: June 8, 2026 
+
+id -> unique identifier (auto-incremented)
+title -> bug description
+severity -> critical, high, medium, low
+status -> open, in progress, resolved
+created_at -> when the bug was logged
+
+Goal: Connect SQLite database to Express server
+
+What I built:
+- Created `database.js` to set up SQLite connection and create `bugs` table if it doesn't exist
+- Seeded 5 initial bugs using COUNT(*) to check if table is empty before inserting
+- Updated `server.js` to query the `bugs` table and return results as JSON
+- Full stack working: React -> Express -> SQLite -> Express -> React
+
+Learned:
+- Create table with SQL
+- db.prepare.all() return all rows as a JS array of objects
+- db.prepare.run() executes a query without returning data (used for INSERT)
+
+Reading:
+1. https://www.sqlitetutorial.net/sqlite-insert/
+
+Day 8: June 9, 2026
+
+Goal: add bug form to create new bugs via POST request
+
+GET -> fetch existing data
+POST -> create new data
+
+app.use(express.json()) -> parse incoming request body
+req.body -> where your form data arrives
+
+Built:
+- BugForm component with controlled inputs
+- POST /bugs route in Express
+- SQLite INSERT on form submit
+- onBugAdded prop passes new bug from child to parent
+- Spread operator adds new bug to state without mutation
+
+Key concepts:
+- POST = create data, GET = read data
+- express.json() parses incoming request body
+- [...bugs, newBug] creates new array — never mutate state directly
+- Data persists in SQLite after server restart
+
+Reading:
+1. https://expressjs.com/en/guide/routing/
