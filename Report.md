@@ -154,3 +154,24 @@ Key concepts:
 
 Reading:
 1. https://expressjs.com/en/guide/routing/
+
+Day 9: June 14, 2026
+
+Goal: Delete button on each row removes bug from SQLite and disappears from table immediately.
+
+Built:
+- DELETE /bugs/:id route in Express
+- req.params.id extracts id from URL
+- Delete button in each BugList row
+- onDelete prop passed from App.jsx to BugList
+- bugs.filter() removes deleted bug from state without mutation
+
+Key concepts:
+- DELETE SQL always needs WHERE — without it wipes entire table
+- Reserved word 'delete' can't be variable name — used 'stmt'
+- URL parameters use :id syntax in Express → req.params.id
+- filter() removes item from state same way spread adds it
+- Routes must be defined before app.listen()
+
+Reading:
+1. https://www.sqlitetutorial.net/sqlite-delete

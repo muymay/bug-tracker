@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 // receive the prop
-export default function BugList({bugs}) {
+export default function BugList({bugs, onDelete}) {
   const [activeFilter, setActiveFilter] = useState('all');
   const filteredState = bugs.filter( bug => {
     if (activeFilter === 'all') return true;
@@ -43,6 +43,7 @@ const statusStyles = {
             <th>Title</th>
             <th>Severity</th>
             <th>Status</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -51,6 +52,7 @@ const statusStyles = {
               <td>{level.title}</td>
               <td className={`rounded-full px-3 py-1 ${severityStyles[level.severity]}`}>{level.severity}</td>
               <td className={`rounded-full px-3 py-1 ${statusStyles[level.status]}`}>{level.status}</td>
+              <td> <button onClick={() => onDelete(level.id)}>Delete</button></td>
             </tr>
           ))}
         </tbody>

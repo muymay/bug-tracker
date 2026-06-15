@@ -44,9 +44,16 @@ app.post('/bugs', (req, res) => {
   const newBug = db.prepare('SELECT * FROM bugs WHERE id = ?').get(result.lastInsertRowid);
   res.json(newBug);
 });
+app.delete('/bugs/:id', (req, res) => {
+  const id = req.params.id;
+  const stmt = db.prepare('DELETE FROM bugs WHERE id =?');
+  stmt.run(id);
+  res.json({ message: 'Bug deleted' });
+});
 app.listen (port, () => {
     console.log('Listening to port');
-})
+});
+
 
 // node backend/server.js
 // Connect to: http://localhost:3001/bugs
