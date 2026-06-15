@@ -47,7 +47,11 @@ function App() {
         Bug Tracker </h1>
       <BugForm onBugAdded={(newBug) => setBugs([...bugs, newBug])} />
       {/* new array = [all existing bugs + the new bug] */}
-      <BugList bugs={bugs} />
+      <BugList bugs={bugs}
+      onDelete={(id) => {
+      fetch(`http://localhost:3001/bugs/${id}`, { method: 'DELETE' })
+      .then(() => setBugs(bugs.filter(bug => bug.id !== id)))
+      }} />
     </div>
   );
 }
