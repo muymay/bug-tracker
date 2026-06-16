@@ -49,9 +49,16 @@ function App() {
       {/* new array = [all existing bugs + the new bug] */}
       <BugList bugs={bugs}
       onDelete={(id) => {
-      fetch(`http://localhost:3001/bugs/${id}`, { method: 'DELETE' })
-      .then(() => setBugs(bugs.filter(bug => bug.id !== id)))
-      }} />
+        fetch(`http://localhost:3001/bugs/${id}`, { method: 'DELETE' })
+          .then(() => setBugs(bugs.filter(bug => bug.id !== id)))
+      }} 
+      onStatusChange={(id, newStatus) => {
+        fetch(`http://localhost:3001/bugs/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({status: newStatus}) })
+          .then(() => setBugs(bugs.map(bug =>
+            bug.id = id ? {...bug, status: newStatus} : bug
+          )))
+      }}
+    />
     </div>
   );
 }

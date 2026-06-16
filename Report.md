@@ -175,3 +175,21 @@ Key concepts:
 
 Reading:
 1. https://www.sqlitetutorial.net/sqlite-delete
+
+Day 10: June 15, 2026
+Goal: A dropdown in each row that changes a bug's status and saves it to the SQLite immediately.
+
+Built:
+- PATCH /bugs/:id route in Express
+- UPDATE SQL query - SET status = ? where id = ?
+- onStatus prop passed from App.jsx to BugList
+- bugs.map() updates one bug in state without mutation
+Key concepts:
+- PATCH is used to update existing data always needs WHERE 
+- PATCH = partial update (one field), PUT = full replace
+- {...bug, status: newStatus} copies object and overrides status only
+- spread on object vs array -> same idea, different syntax
+- Status persists after server restart —> SQLite storing correctly
+
+Reading:
+1. https://www.sqlitetutorial.net/sqlite-update
