@@ -50,6 +50,13 @@ app.delete('/bugs/:id', (req, res) => {
   stmt.run(id);
   res.json({ message: 'Bug deleted' });
 });
+app.patch('/bugs/:id', (req, res) => {
+  const id = req.params.id;
+  const {status} = req.body;
+  const upd = db.prepare('UPDATE bugs SET status = ? WHERE id = ?');
+  upd.run(status,id);
+  res.json({ message: 'Bug updated' })
+});
 app.listen (port, () => {
     console.log('Listening to port');
 });
