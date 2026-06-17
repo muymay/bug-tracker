@@ -74,7 +74,7 @@ After -> App owns data, passes to BugList
 Reading:
 1. https://react.dev/learn/passing-props-to-a-component
 
-### Phase 2 - React Set Up + Bug List (Start June 7, 2026, End - )
+### Phase 2 - React Set Up + Bug List (Start June 7, 2026, End June 15, 2026)
 
 Day 6: June 7, 2026
 
@@ -193,3 +193,23 @@ Key concepts:
 
 Reading:
 1. https://www.sqlitetutorial.net/sqlite-update
+
+### Phase 3 - Filters + Dashboards (Start June 7, 2026, End June 15, 2026)
+
+Day 11: (June 16, 2026)
+Goal: Build a bar chart dashboard showing bug count by severity
+
+Built:
+- Dashboard.jsx component using Recharts BarChart
+- chartData array transforms bugs into {severity, count} objects
+- Connected Dashboard to App.jsx, passing chartData as prop
+
+Key concepts:
+- dataKey prop connects chart elements to data object keys
+- XAxis dataKey="severity" reads labels, Bar dataKey="count" reads heights
+- Order matters in JavaScript — chartData using bugs.filter() 
+  must be defined AFTER useState/useEffect that creates bugs
+- CartesianGrid, Tooltip, XAxis, YAxis are separate composable pieces
+
+Reading:
+1. https://recharts.github.io/?p=/en-US/examples
