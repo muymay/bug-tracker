@@ -89,13 +89,19 @@ function App() {
     { severity: 'low', count: bugs.filter(bug => bug.severity === 'low').length },
   ];
 
+  const statusDatas = [
+    { name: 'Open', value: bugs.filter(bug => bug.status === 'open').length },
+    { name: 'In Progress', value: bugs.filter(bug => bug.status === 'in_progress').length },
+    { name: 'Resolved', value: bugs.filter(bug => bug.status === 'resolved').length },
+  ];
+
   return (
     <div>
       <h1 className="text-3x1 font-bold text-center mt-8"> 
         Bug Tracker 
       </h1>
       
-      <Dashboard chartData={chartData} />
+      <Dashboard chartData={chartData} statusDatas={statusDatas} />
       
       <BugForm onBugAdded={(newBug) => setBugs([...bugs, newBug])} />
       
