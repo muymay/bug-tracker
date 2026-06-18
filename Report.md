@@ -196,7 +196,7 @@ Reading:
 
 ### Phase 3 - Filters + Dashboards (Start June 7, 2026, End June 15, 2026)
 
-Day 11: (June 16, 2026)
+Day 11: June 16, 2026
 Goal: Build a bar chart dashboard showing bug count by severity
 
 Built:
@@ -213,3 +213,19 @@ Key concepts:
 
 Reading:
 1. https://recharts.github.io/?p=/en-US/examples
+
+Day 12: June 17, 2026
+
+Goal: Build a pie chart dashboard showing bug count by status
+
+Built:
+- Dashboard.jsx with PieChart component and statusDatas prop
+- made statusDatas array to hold the data for the pie chart
+Key concepts:
+- dataKey prop connects pie chart elements to data object keys
+- nameKey prop sets the label for each slice
+- outerRadius prop sets the size of the pie chart
+- Cell component is used to style each slice
+
+Readings: 
+1. https://recharts.github.io/en-US/examples/TwoLevelPieChart/
