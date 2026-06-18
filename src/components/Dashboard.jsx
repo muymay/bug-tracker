@@ -26,7 +26,7 @@ function Dashboard({ chartData, statusDatas }) {
             <Tooltip />
         </PieChart>
         </div>
-            )
-        };
+    )
+};
 
 export default Dashboard;
