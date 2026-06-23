@@ -35,8 +35,18 @@ app.use(express.json()); // to parse JSON bodies act as a middleware
 //     ])
 // })
 app.get('/bugs', (req, res) => {
-  const bugs = db.prepare('SELECT * FROM bugs').all(); // get all the bugs from the database
-  res.json(bugs); // send the bugs as a JSON response
+  const { severity, status } = req.query;
+  let result;
+  if (severity && status) {
+    result = db.prepare('SELECT * FROM bugs WHERE severity = ? AND status = ?').all(severity, status);
+  } else if (severity) {
+    result = db.prepare('SELECT * FROM bugs WHERE severity = ?').all(severity);
+  } else if (status) {
+    result = db.prepare('SELECT * FROM bugs WHERE status = ?').all(status);
+  } else {
+    result = db.prepare('SELECT * FROM bugs').all();
+  }
+  res.json(result);
 });
 app.post('/bugs', (req, res) => {
   const { title, severity, status } = req.body;

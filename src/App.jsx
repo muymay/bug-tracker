@@ -75,12 +75,19 @@ import Dashboard from './components/Dashboard'
 
 function App() {
   const [bugs, setBugs] = useState([]);
-  
+  const [activeFilter, setActiveFilter] = useState('all');
+
   useEffect(() => {
-    fetch('http://localhost:3001/bugs')
+    let url = 'http://localhost:3001/bugs';
+    if (activeFilter === 'critical') {
+      url += '?severity=critical';
+    } else if (activeFilter === 'open') {
+      url += '?status=open';
+    }
+    fetch(url)
       .then(res => res.json())
       .then(data => setBugs(data));
-    }, []);
+  }, [activeFilter]);
 
   const chartData = [
     { severity: 'critical', count: bugs.filter(bug => bug.severity === 'critical').length },
@@ -91,7 +98,7 @@ function App() {
 
   const statusDatas = [
     { name: 'Open', value: bugs.filter(bug => bug.status === 'open').length },
-    { name: 'In Progress', value: bugs.filter(bug => bug.status === 'in_progress').length },
+    { name: 'In Progress', value: bugs.filter(bug => bug.status === 'in progress').length },
     { name: 'Resolved', value: bugs.filter(bug => bug.status === 'resolved').length },
   ];
 
@@ -107,6 +114,8 @@ function App() {
       
       <BugList 
         bugs={bugs}
+        activeFilter={activeFilter}
+        onFilterChange={setActiveFilter}
         onDelete={(id) => {
         fetch(`http://localhost:3001/bugs/${id}`, { method: 'DELETE' })
           .then(() => setBugs(bugs.filter(bug => bug.id !== id)))
