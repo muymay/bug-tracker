@@ -1,14 +1,9 @@
 import { useState } from 'react';
 
 // receive the prop
-export default function BugList({bugs, onDelete, onStatusChange}) {
-  const [activeFilter, setActiveFilter] = useState('all');
-  const filteredState = bugs.filter( bug => {
-    if (activeFilter === 'all') return true;
-    if (activeFilter === 'critical') return bug.severity === activeFilter;
-    if (activeFilter === 'open')  return bug.status === activeFilter;
-    return true;
-  });
+// Accept activeFilter and onFilterChange as props instead
+// Call onFilterChange when buttons are clicked
+export default function BugList({bugs, onDelete, onStatusChange , activeFilter, onFilterChange }) {
 
   const severityStyles = {
   'critical': 'bg-red-500 text-white',
@@ -30,11 +25,11 @@ const statusStyles = {
 
       <div className="flex gap-2 mb-4">
         <button className="px-4 py-2 rounded bg-gray-600 text-white" 
-          onClick={() => setActiveFilter('all')}>All</button>
+          onClick={() => onFilterChange('all')}>All</button>
         <button className="px-4 py-2 rounded bg-gray-600 text-white" 
-          onClick={() => setActiveFilter('critical')}>Critical</button>
+          onClick={() => onFilterChange('critical')}>Critical</button>
         <button className="px-4 py-2 rounded bg-gray-600 text-white" 
-          onClick={() => setActiveFilter('open')}>Open</button>
+          onClick={() => onFilterChange('open')}>Open</button>
       </div>
 
       <table className="w-full text-center border-collapse">
@@ -47,7 +42,7 @@ const statusStyles = {
           </tr>
         </thead>
         <tbody>
-          {filteredState.map(level => (
+          {bugs.map(level => (
             <tr key={level.id}>
               <td>{level.title}</td>
               <td className={`rounded-full px-3 py-1 ${severityStyles[level.severity]}`}>{level.severity}</td>

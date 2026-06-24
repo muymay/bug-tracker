@@ -229,3 +229,27 @@ Key concepts:
 
 Readings: 
 1. https://recharts.github.io/en-US/examples/TwoLevelPieChart/
+
+Day 12: June [today's date]
+
+Goal: Backend filtering with SQL WHERE clauses + lift filter state to App.jsx
+
+Built:
+- Updated GET /bugs route to accept query parameters
+- SQL WHERE clause filters bugs by severity and/or status
+- Lifted activeFilter state from BugList up to App.jsx
+- useEffect dependency on activeFilter — refetches on filter change
+- Passed activeFilter and onFilterChange as props to BugList
+- Buttons call onFilterChange instead of local setActiveFilter
+
+Key concepts:
+- Lifting state up — move state to parent when child needs to share it
+- useEffect dependency array — adding activeFilter makes it rerun on change
+- Query strings send filter values: ?severity=critical, ?status=open
+- req.query accesses query string in Express
+- SQL WHERE filters at database level — faster than filtering in JavaScript
+- One res.json() per request — multiple calls cause errors
+
+Reading:
+1. sqlitetutorial.net/sqlite-where
+2. expressjs.com/en/guide/routing.html
