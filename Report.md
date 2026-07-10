@@ -230,7 +230,7 @@ Key concepts:
 Readings: 
 1. https://recharts.github.io/en-US/examples/TwoLevelPieChart/
 
-Day 12: June [today's date]
+Day 12: June 30, 2026
 
 Goal: Backend filtering with SQL WHERE clauses + lift filter state to App.jsx
 
@@ -254,4 +254,26 @@ Reading:
 1. sqlitetutorial.net/sqlite-where
 2. expressjs.com/en/guide/routing.html
 
-July 1, 2026
+July 9, 2026
+Goal: Add loading and error states for better user experience
+
+Built:
+- loading state — shows "Loading bugs..." while fetch runs
+- error state — shows red error message if fetch fails
+- setLoading(true) at start of fetch, setLoading(false) on success and error
+- .catch() handles network failures when server is down
+
+Key concepts:
+- loading and error are just regular useState variables
+- .catch() at end of fetch chain catches any network error
+- setLoading(false) must be called in BOTH .then() and .catch()
+  otherwise loading spinner never stops on error
+- {loading && <p>...</p>} — conditional rendering with &&
+  renders only when loading is true
+
+Bug found:
+- sertError(null) typo — fixed to setError(null)
+
+Tested:
+- Server running → bugs load, loading disappears
+- Server stopped → red error message appears immediately

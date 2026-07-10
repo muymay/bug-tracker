@@ -76,8 +76,12 @@ import Dashboard from './components/Dashboard'
 function App() {
   const [bugs, setBugs] = useState([]);
   const [activeFilter, setActiveFilter] = useState('all');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    setLoading(true);
+    setError(null);
     let url = 'http://localhost:3001/bugs';
     if (activeFilter === 'critical') {
       url += '?severity=critical';
@@ -86,8 +90,14 @@ function App() {
     }
     fetch(url)
       .then(res => res.json())
-      .then(data => setBugs(data));
-  }, [activeFilter]);
+      .then(data => {setBugs(data);
+                     setLoading(false);
+  })
+      .catch(err => {
+      setError('Failed to load bugs. Is the server running?');
+      setLoading(false);
+      });
+    }, [activeFilter]);
 
   const chartData = [
     { severity: 'critical', count: bugs.filter(bug => bug.severity === 'critical').length },
@@ -112,6 +122,9 @@ function App() {
       
       <BugForm onBugAdded={(newBug) => setBugs([...bugs, newBug])} />
       
+      {loading && <p>Loading bugs...</p>}
+      {error && <p className="text-red-500">{error}</p>}
+
       <BugList 
         bugs={bugs}
         activeFilter={activeFilter}
