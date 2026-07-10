@@ -2,82 +2,18 @@ import BugList from './components/BugList'
 import { useState, useEffect } from 'react';
 import BugForm from './components/BugForm';
 import Dashboard from './components/Dashboard'
-// App.jsx the parent, owns the data
-// BugList = the child, displays the data
-
-// Add useState for bugs — starts as empty array []
-// Add useEffect that fetches from http://localhost:3001/bugs
-// Store the result in bugs state using setBugs
-// function App() {
-//   // const bugs = [
-//   //   { id: 1,
-//   //     title: 'Login fails with spaces',
-//   //     severity: 'high',
-//   //     status: 'open' 
-//   //   },
-//   //   { id: 2,
-//   //     title: 'Dropdown not closing',
-//   //     severity: 'medium',
-//   //     status: 'open' 
-//   //   },
-//   //   { id: 3,
-//   //     title: 'Table not filtering',
-//   //     severity: 'critical',
-//   //     status: 'in progress' 
-//   //   },
-//   //   { id: 4,
-//   //     title: 'Form submits empty',
-//   //     severity: 'high',
-//   //     status: 'resolved' 
-//   //   },
-//   //   { id: 5,
-//   //     title: 'Button misaligned on mobile',
-//   //     severity: 'low',
-//   //     status: 'open' 
-//   //   }
-//   // ];
-//   const chartData = [
-//     { severity: 'critical', count: bugs.filter(bug => bug.severity === 'critical').length },
-//     { severity: 'high', count: bugs.filter(bug => bug.severity === 'high').length },
-//     { severity: 'medium', count: bugs.filter(bug => bug.severity === 'medium').length },
-//     { severity: 'low', count: bugs.filter(bug => bug.severity === 'low').length },
-//   ];
-//   const [bugs, setBugs] = useState([]);
-//   useEffect(() => {
-//     fetch('http://localhost:3001/bugs')
-//       .then(res => res.json())
-//       .then(data => setBugs(data));
-//   }, []);
-//   return (
-//     <div>
-//       <h1 className="text-3x1 font-bold text-center mt-8"> 
-//         Bug Tracker </h1>
-//       <BugForm onBugAdded={(newBug) => setBugs([...bugs, newBug])} />
-//       {/* new array = [all existing bugs + the new bug] */}
-//       <BugList bugs={bugs}
-//       onDelete={(id) => {
-//         fetch(`http://localhost:3001/bugs/${id}`, { method: 'DELETE' })
-//           .then(() => setBugs(bugs.filter(bug => bug.id !== id)))
-//       }} 
-//       onStatusChange={(id, newStatus) => {
-//         fetch(`http://localhost:3001/bugs/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({status: newStatus}) })
-//           .then(() => setBugs(bugs.map(bug =>
-//             bug.id = id ? {...bug, status: newStatus} : bug
-//           )))
-//       }}
-//     />
-//     </div>
-//   );
-// }
-
-// export default App
-// npm run dev
+import { Routes, Route, Link } from 'react-router-dom'
+import BugDetail from './pages/BugDetail'
 
 function App() {
   const [bugs, setBugs] = useState([]);
   const [activeFilter, setActiveFilter] = useState('all');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    setLoading(true);
+    setError(null);
     let url = 'http://localhost:3001/bugs';
     if (activeFilter === 'critical') {
       url += '?severity=critical';
@@ -86,8 +22,14 @@ function App() {
     }
     fetch(url)
       .then(res => res.json())
-      .then(data => setBugs(data));
-  }, [activeFilter]);
+      .then(data => {setBugs(data);
+                     setLoading(false);
+  })
+      .catch(err => {
+      setError('Failed to load bugs. Is the server running?');
+      setLoading(false);
+      });
+    }, [activeFilter]);
 
   const chartData = [
     { severity: 'critical', count: bugs.filter(bug => bug.severity === 'critical').length },
@@ -101,33 +43,43 @@ function App() {
     { name: 'In Progress', value: bugs.filter(bug => bug.status === 'in progress').length },
     { name: 'Resolved', value: bugs.filter(bug => bug.status === 'resolved').length },
   ];
-
+  // Wrap return content in <Route path ="/" element={...} />
+  // add a second route <Route path="/bugs/:id" element={<BugDetail />} />
+  
   return (
-    <div>
-      <h1 className="text-3x1 font-bold text-center mt-8"> 
-        Bug Tracker 
-      </h1>
-      
-      <Dashboard chartData={chartData} statusDatas={statusDatas} />
-      
-      <BugForm onBugAdded={(newBug) => setBugs([...bugs, newBug])} />
-      
-      <BugList 
-        bugs={bugs}
-        activeFilter={activeFilter}
-        onFilterChange={setActiveFilter}
-        onDelete={(id) => {
-        fetch(`http://localhost:3001/bugs/${id}`, { method: 'DELETE' })
-          .then(() => setBugs(bugs.filter(bug => bug.id !== id)))
-         }} 
-        onStatusChange={(id, newStatus) => {
-        fetch(`http://localhost:3001/bugs/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({status: newStatus}) })
-          .then(() => setBugs(bugs.map(bug =>
-            bug.id = id ? {...bug, status: newStatus} : bug
-          )))
-         }}
-      />
-    </div>
+    <Routes>
+      <Route path ="/" element={
+        <div>
+          <h1 className="text-3x1 font-bold text-center mt-8"> 
+            Bug Tracker 
+          </h1>
+          
+          <Dashboard chartData={chartData} statusDatas={statusDatas} />
+          
+          <BugForm onBugAdded={(newBug) => setBugs([...bugs, newBug])} />
+          
+          {loading && <p>Loading bugs...</p>}
+          {error && <p className="text-red-500">{error}</p>}
+
+          <BugList 
+            bugs={bugs}
+            activeFilter={activeFilter}
+            onFilterChange={setActiveFilter}
+            onDelete={(id) => {
+            fetch(`http://localhost:3001/bugs/${id}`, { method: 'DELETE' })
+              .then(() => setBugs(bugs.filter(bug => bug.id !== id)))
+            }} 
+            onStatusChange={(id, newStatus) => {
+            fetch(`http://localhost:3001/bugs/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({status: newStatus}) })
+              .then(() => setBugs(bugs.map(bug =>
+                bug.id = id ? {...bug, status: newStatus} : bug
+              )))
+            }}
+          />
+        </div>
+      } />
+      <Route path="/bugs/:id" element={<BugDetail />} />
+    </Routes>
   );
 }
 export default App

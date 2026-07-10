@@ -70,6 +70,10 @@ app.patch('/bugs/:id', (req, res) => {
 app.listen (port, () => {
     console.log('Listening to port');
 });
+app.get('/bugs/:id', (req, res) => {
+  const bug = db.prepare('SELECT * FROM bugs WHERE id = ?').get(req.params.id);
+  res.json(bug);
+});
 
 
 // node backend/server.js

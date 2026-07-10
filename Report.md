@@ -230,7 +230,7 @@ Key concepts:
 Readings: 
 1. https://recharts.github.io/en-US/examples/TwoLevelPieChart/
 
-Day 12: June [today's date]
+Day 12: June 30, 2026
 
 Goal: Backend filtering with SQL WHERE clauses + lift filter state to App.jsx
 
@@ -254,4 +254,43 @@ Reading:
 1. sqlitetutorial.net/sqlite-where
 2. expressjs.com/en/guide/routing.html
 
-July 1, 2026
+### Phase 4 - Polish + Deploy (Start July 9, 2026, End -)
+
+July 9, 2026
+Goal: Add loading and error states for better user experience and add React Router for navigation between pages
+
+Built:
+- loading state — shows "Loading bugs..." while fetch runs
+- error state — shows red error message if fetch fails
+- setLoading(true) at start of fetch, setLoading(false) on success and error
+- .catch() handles network failures when server is down
+- Installed react-router-dom
+- Wrapped app in BrowserRouter in main.jsx
+- Added Routes and Route in App.jsx
+- Home route "/" shows dashboard + bug list
+- Detail route "/bugs/:id" shows single bug page
+- Created src/pages/BugDetail.jsx with useParams
+- BugDetail fetches single bug from /bugs/:id endpoint
+- Added GET /bugs/:id route in server.js
+
+Key concepts:
+- loading and error are just regular useState variables
+- .catch() at end of fetch chain catches any network error
+- setLoading(false) must be called in BOTH .then() and .catch()
+  otherwise loading spinner never stops on error
+- {loading && <p>...</p>} — conditional rendering with &&
+  renders only when loading is true
+- BrowserRouter enables client-side routing
+- Routes wraps all Route definitions
+- Route path="/bugs/:id" — :id is a URL parameter
+- useParams() reads :id from the URL in the component
+- Link replaces <a> tag — no full page reload
+
+Tested:
+- Server running → bugs load, loading disappears
+- Server stopped → red error message appears immediately
+- Clicking title of bug in table → navigates to /bugs/:id page, fetches single bug, displays details
+
+Reading:
+1. vitejs.dev/guide/static-deploy
+2. https://reactrouter.com/start/declarative/installation
