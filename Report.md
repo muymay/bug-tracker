@@ -254,6 +254,8 @@ Reading:
 1. sqlitetutorial.net/sqlite-where
 2. expressjs.com/en/guide/routing.html
 
+### Phase 4 - Polish + Deploy (Start July 9, 2026, End -)
+
 July 9, 2026
 Goal: Add loading and error states for better user experience
 
