@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // receive the prop
 // Accept activeFilter and onFilterChange as props instead
@@ -44,7 +44,7 @@ const statusStyles = {
         <tbody>
           {bugs.map(level => (
             <tr key={level.id}>
-              <td>{level.title}</td>
+              <td><Link to={`/bugs/${level.id}`}>{level.title}</Link></td>
               <td className={`rounded-full px-3 py-1 ${severityStyles[level.severity]}`}>{level.severity}</td>
               <td><select
                   value={level.status}
