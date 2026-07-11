@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    let url = 'http://localhost:3001/bugs';
+    let url = 'https://bug-tracker-production-ef02.up.railway.app/bugs';
     if (activeFilter === 'critical') {
       url += '?severity=critical';
     } else if (activeFilter === 'open') {
@@ -66,11 +66,11 @@ function App() {
             activeFilter={activeFilter}
             onFilterChange={setActiveFilter}
             onDelete={(id) => {
-            fetch(`http://localhost:3001/bugs/${id}`, { method: 'DELETE' })
+            fetch(`https://bug-tracker-production-ef02.up.railway.app/bugs/${id}`, { method: 'DELETE' })
               .then(() => setBugs(bugs.filter(bug => bug.id !== id)))
             }} 
             onStatusChange={(id, newStatus) => {
-            fetch(`http://localhost:3001/bugs/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({status: newStatus}) })
+            fetch(`https://bug-tracker-production-ef02.up.railway.app/bugs/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({status: newStatus}) })
               .then(() => setBugs(bugs.map(bug =>
                 bug.id = id ? {...bug, status: newStatus} : bug
               )))
