@@ -72,7 +72,7 @@ function App() {
             onStatusChange={(id, newStatus) => {
             fetch(`https://bug-tracker-production-ef02.up.railway.app/bugs/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({status: newStatus}) })
               .then(() => setBugs(bugs.map(bug =>
-                bug.id = id ? {...bug, status: newStatus} : bug
+                bug.id === id ? {...bug, status: newStatus} : bug
               )))
             }}
           />
