@@ -256,7 +256,7 @@ Reading:
 
 ### Phase 4 - Polish + Deploy (Start July 9, 2026, End -)
 
-July 9, 2026
+Day 13: July 9, 2026
 Goal: Add loading and error states for better user experience and add React Router for navigation between pages
 
 Built:
@@ -294,3 +294,35 @@ Tested:
 Reading:
 1. vitejs.dev/guide/static-deploy
 2. https://reactrouter.com/start/declarative/installation
+
+Day 15: July 11, 2026
+
+Goal: Deploy full stack to production
+
+Built:
+- Built React app for production with npm run build
+- Deployed frontend to Vercel — auto-deploys on every git push
+- Deployed backend to Railway — connected to GitHub repo
+- Created src/config.js with API_URL for single source of truth
+- Updated all fetch calls to use Railway production URL
+- Fixed critical bug: bug.id = id assignment affecting all bugs on status change
+
+Key concepts:
+- npm run build creates optimized /dist folder for production
+- Vercel serves static files globally via CDN
+- Railway runs Node.js server continuously
+- config.js centralizes API URL — change one place, updates everywhere
+- Production URL replaces localhost in all fetch calls
+- Auto-deploy: pushing to GitHub triggers Vercel redeploy automatically
+
+Bugs fixed:
+- bug.id = id was assignment not comparison — fixed to bug.id === id
+  this was causing ALL bugs to update status instead of just one
+- Delete and PATCH URLs missing /${id} — fixed to target specific bug
+
+Live URLs:
+Frontend: https://bug-tracker-psi-six.vercel.app
+Backend: https://bug-tracker-production-ef02.up.railway.app
+
+Reading:
+1. vitejs.dev/guide/static-deploy
