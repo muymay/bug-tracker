@@ -9,7 +9,7 @@ export default function BugDetail() {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    fetch(`http://localhost:3001/bugs/${id}`)
+    fetch(`https://bug-tracker-production-ef02.up.railway.app/bugs/${id}`)
       .then(res => res.json())
       .then(data => {
         setBug(data);

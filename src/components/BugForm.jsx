@@ -11,7 +11,7 @@ const BugForm = ({ onBugAdded }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:3001/bugs', {
+            const response = await fetch('https://bug-tracker-production-ef02.up.railway.app/bugs', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ title, severity, status })
